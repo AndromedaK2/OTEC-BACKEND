@@ -1,6 +1,7 @@
 package OTEC.OTEC.Services.Alumnos;
 
 import OTEC.OTEC.Models.Alumnos.Alumno;
+import OTEC.OTEC.Models.Alumnos.CrearAlumno;
 import OTEC.OTEC.Repositories.Alumnos.IAlumnoRepository;
 import OTEC.OTEC.Services.Alumnos.IAlumnoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,4 +39,31 @@ public class AlumnoService implements IAlumnoService<Alumno> {
         iAlumnoRepository.deleteById(id);
 
     }
+
+    public Alumno crearAlumno(CrearAlumno crearAlumno){
+        Alumno alumno = new Alumno();
+
+        alumno.setNombres(crearAlumno.nombres());
+        alumno.setApellidos(crearAlumno.apellidos());
+        alumno.setRut(crearAlumno.rut());
+        alumno.setCorreo(crearAlumno.correo());
+        alumno.setSexo(crearAlumno.sexo());
+        alumno.setDireccion(crearAlumno.direccion());
+
+
+        return iAlumnoRepository.save(alumno);
+    }
+
+   public Optional<Alumno> BuscarPornombre(String nombres){
+
+
+        return iAlumnoRepository.findByNombres(nombres);
+   }
+    public Optional<Alumno> BuscarPorRut(String rut){
+
+
+        return iAlumnoRepository.findByRut(rut);
+    }
+
+
 }
