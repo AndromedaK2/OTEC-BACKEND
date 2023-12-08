@@ -16,7 +16,7 @@ public interface IAlumnoService<T>{
 
     Alumno update(Alumno alumno);
 
-    void delete(Integer id);
+    void delete(Integer  id);
 
 
 

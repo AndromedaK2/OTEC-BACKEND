@@ -2,6 +2,7 @@ package OTEC.OTEC.Services.Alumnos;
 
 import OTEC.OTEC.Models.Alumnos.Alumno;
 import OTEC.OTEC.Models.Alumnos.CrearAlumno;
+import OTEC.OTEC.Models.Alumnos.ModificarAlumno;
 import OTEC.OTEC.Repositories.Alumnos.IAlumnoRepository;
 import OTEC.OTEC.Services.Alumnos.IAlumnoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,11 +60,47 @@ public class AlumnoService implements IAlumnoService<Alumno> {
 
         return iAlumnoRepository.findByNombres(nombres);
    }
-    public Optional<Alumno> BuscarPorRut(String rut){
+   public Optional<Alumno> BuscarPorRut(String rut){
 
 
         return iAlumnoRepository.findByRut(rut);
     }
 
+    public ModificarAlumno ActualizarDatos (ModificarAlumno modificarAlumno){
+       List<Alumno> alumnos = iAlumnoRepository.findAll();
 
+       for (int i =0 ; i<alumnos.size();i++){
+
+           if(alumnos.get(i).getRut().equals(modificarAlumno.Rut())){
+               Alumno alumno = alumnos.get(i);
+
+               alumno.setNombres(modificarAlumno.Nombres());
+               alumno.setApellidos(modificarAlumno.Apellidos());
+               alumno.setCorreo(modificarAlumno.Correo());
+               alumno.setDireccion(modificarAlumno.Direccion());
+
+               iAlumnoRepository.save(alumno);
+
+
+           }
+
+       }
+
+        return modificarAlumno;
+    }
+
+
+    public void BorrarPorRut(String rut){
+        List<Alumno>alumnos = iAlumnoRepository.findAll();
+
+        for (int i = 0; i< alumnos.size();i++){
+            if(alumnos.get(i).getRut().equals(rut)){
+                iAlumnoRepository.findById(alumnos.get(i).getIdAlumno());
+
+
+            }
+
+        }
+
+    }
 }
