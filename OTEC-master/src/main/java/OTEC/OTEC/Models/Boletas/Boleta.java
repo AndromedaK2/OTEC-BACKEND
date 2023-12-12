@@ -3,11 +3,12 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 @Entity
-@Table(name = "boletas") //estaba alegando porque la tabla se llama user
+@Table(name = "boletas")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,6 +17,7 @@ public class Boleta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idboleta")
     private Integer idBoleta;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "fecha")
     private Date fecha;
     @Column(name = "monto")
@@ -27,6 +29,6 @@ public class Boleta {
     @Column(name = "folio")
     private Integer folio;
     @Column(name = "idalumno")
-    private Integer idAlumno;
+    private Integer idalumno;
 
 }

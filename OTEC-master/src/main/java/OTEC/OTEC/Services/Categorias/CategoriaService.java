@@ -3,6 +3,7 @@ package OTEC.OTEC.Services.Categorias;
 import OTEC.OTEC.Models.Calificaciones.Calificacion;
 import OTEC.OTEC.Models.Categorias.Categoria;
 import OTEC.OTEC.Repositories.Calificaciones.ICalificacionRepository;
+import OTEC.OTEC.Repositories.Categorias.ICategoriaRepository;
 import OTEC.OTEC.Services.Calificaciones.ICalificacionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,33 +12,33 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CategoriaService implements ICalificacionService<Categoria> {
+public class CategoriaService implements ICategoriaService<Categoria> {
 
     @Autowired
-    private ICalificacionRepository iCalificacionRepository;
+    private ICategoriaRepository iCategoriaRepository;
     @Override
-    public List<Calificacion> findAll() {
-        return iCalificacionRepository.findAll();
+    public List<Categoria> findAll() {
+        return iCategoriaRepository.findAll();
     }
 
     @Override
-    public Optional<Calificacion> findById(Integer id) {
-        return iCalificacionRepository.findById(id);
+    public Optional<Categoria> findById(Integer id) {
+        return iCategoriaRepository.findById(id);
     }
 
     @Override
-    public Calificacion create(Calificacion calificacion) {
-        return iCalificacionRepository.save(calificacion);
+    public Categoria create(Categoria categoria) {
+        return iCategoriaRepository.save(categoria);
     }
 
     @Override
-    public Calificacion update(Calificacion calificacion) {
-        return iCalificacionRepository.save(calificacion);
+    public Categoria update(Categoria categoria) {
+        return iCategoriaRepository.save(categoria);
     }
 
     @Override
     public void delete(Integer id) {
-        iCalificacionRepository.deleteById(id);
+        iCategoriaRepository.deleteById(id);
 
     }
 }

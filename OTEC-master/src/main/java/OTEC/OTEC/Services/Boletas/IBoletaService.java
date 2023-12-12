@@ -11,6 +11,8 @@ public interface IBoletaService<T> {
 
     Optional<Boleta> findById(Integer id);
 
+    Boleta findByIdEstudiante(Integer id);
+
     Boleta create(Boleta boleta);
 
     Boleta update(Boleta boleta);
