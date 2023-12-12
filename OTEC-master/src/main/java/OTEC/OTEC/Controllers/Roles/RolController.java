@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/rol")
+@RequestMapping("/roles")
 public class RolController {
 
     @Autowired
     private RolService rolService;
+
+
 }
