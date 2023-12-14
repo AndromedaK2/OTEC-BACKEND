@@ -1,5 +1,6 @@
 package OTEC.OTEC.Services.Usuarios;
 
+import OTEC.OTEC.Models.Usuarios.Register;
 import OTEC.OTEC.Models.Usuarios.Usuario;
 import OTEC.OTEC.Repositories.Usuarios.IUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,14 @@ public class UsuarioService implements IUsuarioService<Usuario> {
     }
 
     @Override
-    public Usuario register(Usuario usuario) {
+    public Usuario register(Register register) {
+        Usuario usuario = new Usuario();
+        usuario.setNombreUsuario(register.nombre());
+        usuario.setRut(register.rut());
+        usuario.setPass(register.pass());
+        usuario.setCorreo(register.correo());
+        usuario.setTelefono(register.telefono());
+        usuario.setIdRol(register.idRol());
         return iUsuarioRepository.save(usuario);
     }
 

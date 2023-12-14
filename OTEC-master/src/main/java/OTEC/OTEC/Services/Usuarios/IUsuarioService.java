@@ -1,6 +1,7 @@
 package OTEC.OTEC.Services.Usuarios;
 
 
+import OTEC.OTEC.Models.Usuarios.Register;
 import OTEC.OTEC.Models.Usuarios.Usuario;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public interface IUsuarioService<T> {
 
     Usuario findById(Integer id);
 
-    Usuario register(Usuario usuario);
+    Usuario register(Register register);
 
     Usuario login(String nombre, String password);
 
