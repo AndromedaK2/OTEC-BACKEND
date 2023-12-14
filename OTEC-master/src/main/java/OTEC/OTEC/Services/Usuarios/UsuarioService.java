@@ -5,8 +5,6 @@ import OTEC.OTEC.Models.Usuarios.Usuario;
 import OTEC.OTEC.Repositories.Usuarios.IUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -26,7 +24,7 @@ public class UsuarioService implements IUsuarioService<Usuario> {
     public Usuario findById(Integer id) {
         Optional<Usuario> usuario = iUsuarioRepository.findById(id);
         if(usuario.isEmpty()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Usuario : %s no encontrado", id));
+            throw new ResponseStatusException(HttpStatus.CONFLICT, String.format("Usuario : %s no encontrado", id));
         }
         return usuario.get();
     }
@@ -34,11 +32,9 @@ public class UsuarioService implements IUsuarioService<Usuario> {
     @Override
     public Usuario register(Register register) {
         Usuario usuario = new Usuario();
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        String passEncrypted =  bCryptPasswordEncoder.encode(register.pass());
         usuario.setNombreUsuario(register.nombre());
         usuario.setRut(register.rut());
-        usuario.setPass(passEncrypted);
+        usuario.setPass(register.pass());
         usuario.setCorreo(register.correo());
         usuario.setTelefono(register.telefono());
         usuario.setIdRol(register.idRol());
@@ -47,17 +43,10 @@ public class UsuarioService implements IUsuarioService<Usuario> {
 
     @Override
     public Usuario login(String nombre, String pass) {
-
-        Optional<Usuario> usuario = iUsuarioRepository.findByNombreUsuario(nombre);
+        Optional<Usuario> usuario =  iUsuarioRepository.login(nombre, pass);
         if(usuario.isEmpty()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Usuario : %s no encontrado", nombre));
+            throw new ResponseStatusException(HttpStatus.CONFLICT, String.format("Usuario : %s no encontrado", nombre));
         }
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-
-        if(!bCryptPasswordEncoder.matches( pass,usuario.get().getPass())) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, String.format("Usuario : credenciales incorrectas"));
-        }
-        
         return usuario.get();
     }
 
@@ -69,5 +58,6 @@ public class UsuarioService implements IUsuarioService<Usuario> {
     @Override
     public void delete(Integer id) {
         iUsuarioRepository.deleteById(id);
+
     }
 }
