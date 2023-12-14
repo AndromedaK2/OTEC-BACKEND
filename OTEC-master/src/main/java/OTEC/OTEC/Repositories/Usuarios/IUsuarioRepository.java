@@ -12,4 +12,6 @@ public interface IUsuarioRepository extends JpaRepository<Usuario,Integer> {
     @Query(value = "SELECT u FROM Usuario u WHERE LOWER(u.nombreUsuario) = LOWER(:nombreUsuario) and LOWER(u.pass) = LOWER(:pass)")
     Optional<Usuario> login(@Param("nombreUsuario") String nombreUsuario, @Param("pass") String pass);
 
+    Optional<Usuario> findByNombreUsuario(@Param("nombreUsuario") String nombreUsuario);
+
 }
