@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 
 @Entity
-@Table(name = "usuarios") //estaba alegando porque la tabla se llama user
+@Table(name = "usuarios")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

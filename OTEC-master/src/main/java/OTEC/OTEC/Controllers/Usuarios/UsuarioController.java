@@ -1,5 +1,7 @@
 package OTEC.OTEC.Controllers.Usuarios;
 
+import OTEC.OTEC.Models.Usuarios.Login;
+import OTEC.OTEC.Models.Usuarios.Register;
 import OTEC.OTEC.Models.Usuarios.Usuario;
 import OTEC.OTEC.Services.Usuarios.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,28 +23,23 @@ public class UsuarioController {
         return new ResponseEntity<>(rol, HttpStatus.OK);
     }
 
-
     @GetMapping
     public ResponseEntity<List<Usuario>> obtenerUsuarios( ){
         List<Usuario> usuarios = usuarioService.findAll();
         return new ResponseEntity<>(usuarios,HttpStatus.OK);
     }
 
-
     @PostMapping(value = "/register")
-    public ResponseEntity<Usuario>  registrar(@RequestBody Usuario usuario) {
-        Usuario usuarioCreado = usuarioService.register(usuario);
+    public ResponseEntity<Usuario>  registrar(@RequestBody Register register) {
+        Usuario usuarioCreado = usuarioService.register(register);
         return new ResponseEntity<>(usuarioCreado,HttpStatus.CREATED);
     }
 
-
-
-    @PostMapping("/login/{nombre}/{pass}")
-    public ResponseEntity<Usuario> login(@PathVariable("nombre") String nombre, @PathVariable("pass") String pass){
-        Usuario usuario =  usuarioService.login(nombre,pass);
+    @PostMapping("/login")
+    public ResponseEntity<Usuario> login(@RequestBody Login login){
+        Usuario usuario =  usuarioService.login(login.nombre(), login.pass());
         return new ResponseEntity<>(usuario,HttpStatus.OK);
     }
-
 
     @PutMapping(value = "/actualizar")
     public ResponseEntity<Usuario> actualizar(@RequestBody Usuario usuario){
@@ -50,13 +47,10 @@ public class UsuarioController {
         return new ResponseEntity<>(user,HttpStatus.OK);
     }
 
-
     @DeleteMapping("/id/{id}")
     public ResponseEntity eliminarUsuarioPorId(@PathVariable("id") Integer idUser){
         usuarioService.delete(idUser);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
-
-
 
 }
