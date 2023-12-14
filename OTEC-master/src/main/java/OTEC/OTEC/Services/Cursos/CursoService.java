@@ -2,6 +2,7 @@ package OTEC.OTEC.Services.Cursos;
 
 import OTEC.OTEC.Models.Cursos.Curso;
 import OTEC.OTEC.Repositories.Cursos.ICursoRepository;
+import OTEC.OTEC.Services.Alumnos.IAlumnoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,8 @@ import java.util.Optional;
 public class CursoService implements ICursoService<Curso> {
     @Autowired
     private ICursoRepository iCursoRepository;
+    @Autowired
+    private IAlumnoService iAlumnoService;
 
     @Override
     public List<Curso> findAll() {
@@ -20,6 +23,10 @@ public class CursoService implements ICursoService<Curso> {
 
     @Override
     public Optional<Curso> findById(Integer id) {
+        return iCursoRepository.findById(id);
+    }
+
+    public Optional<Curso> findByIdEstudiante(Integer id) {
         return iCursoRepository.findById(id);
     }
 

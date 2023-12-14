@@ -15,10 +15,10 @@ import javax.mail.internet.MimeMessage;
 @Service
 public class CorreoService implements ICorreoService {
 
-    public void EnvioEmail(int idBoleta, int montoPagado, String detalle,String formaPago, String nombres){
+    public void EnvioEmail(int idBoleta, int montoPagado, String detalle,String formaPago, String nombres, String email){
         final String username = "pagosoteclab@gmail.com";
         final String password = "cghv ttcr trpt xiby";
-        String toEmail = "joseeluissoto@gmail.com";
+        String toEmail = email;
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");

@@ -10,6 +10,7 @@ public interface ICursoService<T> {
     List<Curso> findAll();
 
     Optional<Curso> findById(Integer id);
+    Optional<Curso> findByIdEstudiante(Integer id);
 
     Curso create(Curso curso);
 
