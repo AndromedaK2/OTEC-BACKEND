@@ -9,9 +9,11 @@ import java.util.Optional;
 public interface IUsuarioService<T> {
     List<Usuario> findAll();
 
-    Optional<Usuario> findById(Integer id);
+    Usuario findById(Integer id);
 
-    Usuario create(Usuario usuario);
+    Usuario register(Usuario usuario);
+
+    Usuario login(String nombre, String password);
 
     Usuario update(Usuario usuario);
 

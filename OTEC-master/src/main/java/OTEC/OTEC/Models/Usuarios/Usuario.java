@@ -19,16 +19,10 @@ public class Usuario {
     private String nombreUsuario;
     @Column(name = "pass")
     private String pass;
-    @Column(name = "nombres")
-    private String nombres;
-    @Column(name = "apellidos")
-    private String apellidos;
     @Column(name = "correo")
     private String correo;
     @Column(name = "telefono")
     private Integer telefono;
-    @Column(name = "direccion")
-    private String direccion;
     @Column(name = "rut")
     private String rut;
     @Column(name = "idrol")
