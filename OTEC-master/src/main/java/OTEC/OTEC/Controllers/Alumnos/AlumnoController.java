@@ -2,15 +2,17 @@ package OTEC.OTEC.Controllers.Alumnos;
 
 
 import OTEC.OTEC.Models.Alumnos.Alumno;
+import OTEC.OTEC.Models.Alumnos.CrearAlumno;
+import OTEC.OTEC.Models.Alumnos.ModificarAlumno;
 import OTEC.OTEC.Services.Alumnos.AlumnoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/alumnos")
@@ -26,4 +28,38 @@ public class AlumnoController {
         return new ResponseEntity<>(alumnos, HttpStatus.OK);
 
     }
+
+    @GetMapping("/nombre/{nombres}")
+    public ResponseEntity<Alumno> findByNombres(@PathVariable("nombres")String nombres){
+
+        return alumnoService.BuscarPornombre(nombres).map(ResponseEntity::ok).orElseGet(()->ResponseEntity.notFound().build());
+
+    }
+
+    @GetMapping("/rut/{rut}")
+    public ResponseEntity<Alumno> findByRut(@PathVariable("rut")String rut){
+        return alumnoService.BuscarPorRut(rut).map(ResponseEntity::ok).orElseGet(()->ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public ResponseEntity<Alumno> create(@RequestBody CrearAlumno alumno){
+
+        return new ResponseEntity<>(alumnoService.crearAlumno(alumno),HttpStatus.CREATED);
+    }
+
+    @PutMapping("/alumnomodificar")
+    public ResponseEntity<ModificarAlumno> update(@RequestBody ModificarAlumno modificarAlumno){
+
+        return new ResponseEntity<> (alumnoService.ActualizarDatos(modificarAlumno),HttpStatus.OK);
+
+    }
+
+    @DeleteMapping("/{rut}")
+    public ResponseEntity<Object> delete(@PathVariable("rut")String rut){
+         alumnoService.BuscarPorRut(rut);
+
+         return new ResponseEntity(HttpStatus.OK);
+    }
+
+
 }
