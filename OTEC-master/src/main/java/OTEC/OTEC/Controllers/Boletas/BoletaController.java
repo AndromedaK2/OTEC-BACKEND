@@ -44,9 +44,10 @@ public class BoletaController {
         return boletaService.update(boleta);
     }
 
-    @DeleteMapping("/delete")
-    public void eliminarBoleta(@RequestBody int idBboleta) {
-        boletaService.delete(idBboleta);
+    @DeleteMapping("/delete/{idBoleta}")
+    public ResponseEntity<String> eliminarBoleta(@PathVariable int idBoleta) {
+        boletaService.delete(idBoleta);
+        return new ResponseEntity<>("Boleta con ID " + idBoleta + " eliminada exitosamente", HttpStatus.OK);
     }
 
 }

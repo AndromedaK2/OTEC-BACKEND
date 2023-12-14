@@ -37,7 +37,20 @@ public class CursoService implements ICursoService<Curso> {
 
     @Override
     public Curso update(Curso curso) {
-        return iCursoRepository.save(curso);
+        Optional<Curso> cursoSt = iCursoRepository.findById(curso.getIdcurso());
+        Curso cursoUpdate = cursoSt.get();
+        cursoUpdate.setCodigo(curso.getCodigo());
+        cursoUpdate.setFechaInicio(curso.getFechaInicio());
+        cursoUpdate.setFechaFin(curso.getFechaFin());
+        cursoUpdate.setNombre(curso.getNombre());
+        cursoUpdate.setNivel(curso.getNivel());
+        cursoUpdate.setModalidad(curso.getModalidad());
+        cursoUpdate.setValor(curso.getValor());
+        cursoUpdate.setActivo(curso.getActivo());
+        cursoUpdate.setIdHorario(curso.getIdHorario());
+        cursoUpdate.setIdCategoria(curso.getIdCategoria());
+        cursoUpdate.setIdProfesor(curso.getIdProfesor());
+        return iCursoRepository.save(cursoUpdate);
     }
 
     @Override

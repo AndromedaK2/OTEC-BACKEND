@@ -114,7 +114,14 @@ public class BoletaService implements IBoletaService<Boleta> {
 
     @Override
     public Boleta update(Boleta boleta) {
-        return iBoletaRepository.save(boleta);
+        Boleta boleta1 = iBoletaRepository.getById(boleta.getIdBoleta());
+        boleta1.setFecha(boleta.getFecha());
+        boleta1.setMonto(boleta.getMonto());
+        boleta1.setMetodoPago(boleta.getMetodoPago());
+        boleta1.setDescripcion(boleta.getDescripcion());
+        boleta1.setFolio(boleta.getFolio());
+        boleta1.setIdalumno(boleta.getIdalumno());
+        return iBoletaRepository.save(boleta1);
     }
 
     @Override

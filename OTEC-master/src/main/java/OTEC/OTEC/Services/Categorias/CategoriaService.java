@@ -33,7 +33,10 @@ public class CategoriaService implements ICategoriaService<Categoria> {
 
     @Override
     public Categoria update(Categoria categoria) {
-        return iCategoriaRepository.save(categoria);
+        Categoria categoria1 = iCategoriaRepository.getById(categoria.getIdCategoria());
+        categoria1.setDescripcion(categoria.getDescripcion());
+        categoria1.setNombre(categoria.getNombre());
+        return iCategoriaRepository.save(categoria1);
     }
 
     @Override

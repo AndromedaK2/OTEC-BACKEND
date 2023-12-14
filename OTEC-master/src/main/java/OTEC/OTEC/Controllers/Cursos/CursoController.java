@@ -45,7 +45,7 @@ public class CursoController {
         return cursoService.update(curso);
     }
 
-    @DeleteMapping("/delete/{idCategoria}")
+    @DeleteMapping("/delete/{idCurso}")
     public ResponseEntity<String> delete(@PathVariable int idCurso){
         cursoService.delete(idCurso);
         return new ResponseEntity<>("Curso con ID " + idCurso + " eliminado exitosamente", HttpStatus.OK);
