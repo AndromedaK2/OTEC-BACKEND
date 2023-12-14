@@ -81,7 +81,7 @@ public class BoletaService implements IBoletaService<Boleta> {
                     alumnoEstado.setIdAlumno(boleta.getIdalumno());
                     var alumnoEstadoRsp = iAlumnoEstadoRepository.save(alumnoEstado);
 
-                    iCorreoService.EnvioEmail(boletaGenerada.getIdBoleta(), boleta.getMonto(), boleta.getDescripcion(), boleta.getMetodoPago(), alumno.getNombres()+" "+alumno.getApellidos());
+                    iCorreoService.EnvioEmail(boletaGenerada.getIdBoleta(), boleta.getMonto(), boleta.getDescripcion(), boleta.getMetodoPago(), alumno.getNombres()+" "+alumno.getApellidos(), alumno.getCorreo());
                 } else if (boleta.getMonto() < curso.getValor()) {
                     //pago parcial
                     int valor = curso.getValor();
@@ -98,7 +98,7 @@ public class BoletaService implements IBoletaService<Boleta> {
                 if(arancelDelCurso != null){
                     if(Objects.equals(Integer.parseInt(arancelDelCurso.getMonto()), boleta.getMonto())){
                         //enviar correo de pago completo
-                        iCorreoService.EnvioEmail(boletaGenerada.getIdBoleta(), boleta.getMonto(), boleta.getDescripcion(), boleta.getMetodoPago(), alumno.getNombres()+" "+alumno.getApellidos());
+                        iCorreoService.EnvioEmail(boletaGenerada.getIdBoleta(), boleta.getMonto(), boleta.getDescripcion(), boleta.getMetodoPago(), alumno.getNombres()+" "+alumno.getApellidos(), alumno.getCorreo());
                     } else if (boleta.getMonto() < curso.getValor()) {
                         //pago parcial
                     }

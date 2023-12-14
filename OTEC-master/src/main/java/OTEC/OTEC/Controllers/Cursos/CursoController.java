@@ -29,6 +29,12 @@ public class CursoController {
         return new ResponseEntity<>(curso, HttpStatus.OK);
     }
 
+    @GetMapping("/byIdEstudiante/{id}")
+    public ResponseEntity<Optional<Curso>> findbyIdEstudiante(@PathVariable int id){
+        Optional<Curso> curso = cursoService.findByIdEstudiante(id);
+        return new ResponseEntity<>(curso, HttpStatus.OK);
+    }
+
     @PostMapping("/save")
     public Curso create(@RequestBody Curso curso){
         return cursoService.create(curso);
